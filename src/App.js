@@ -1,40 +1,30 @@
 import React, { Component } from 'react';
-import { observable } from 'mobx';
-import { observer }  from 'mobx-react';
+import {BrowserRouter, Route, Link} from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 
-class Comment extends React.Component {
-    render() {
-        const {comment} = this.props;
-        return (
-            <div>{comment.text}</div>
-        )
-    }
-}
+import Menu from './components/menu/index';
+import LeftPanelController from './components/left-panel-controller/index';
+import Routes from './routes';
 
-@observer class App extends Component {
-    @observable counter = 0;
+import {Provider} from 'mobx-react';
+import menuStore from './stores/menu-store';
 
-    onIncrement = () => {
-        this.counter++;
-    }
+const history = createBrowserHistory();
 
-    onDecrement = () => {
-        this.counter--;
-    }
 
-    render() {
+const stores = {menuStore};
 
-        const comment = {
-            author: 'Author',
-            text: 'comment text'
-        };
-
-        return (
+const App = () => (
+    <Provider {...stores}>
+        <BrowserRouter history={history}>
             <div>
-                <Comment comment={comment} />
+                <Menu/>
+                <LeftPanelController/>
+                <Routes/>
+                
             </div>
-        );
-    }
-}
+        </BrowserRouter>
+    </Provider>
+)
 
 export default App;
