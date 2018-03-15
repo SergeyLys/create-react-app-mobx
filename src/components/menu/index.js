@@ -1,11 +1,11 @@
 import React from 'react';
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 
-import menuStore from '../../stores/menu-store';
-
+@inject('menuStore')
 @observer 
 class Menu extends React.Component {
     render() {
+        const { menuStore } = this.props;
         return (
             <header>
                 <span 

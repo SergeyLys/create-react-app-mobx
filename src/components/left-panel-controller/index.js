@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import menuStore from '../../stores/menu-store';
-import {observer} from 'mobx-react';
+import {observer, inject} from 'mobx-react';
 
 const LeftPanelController = observer(() => (
     <div style={{display: menuStore.isOpenLeftPanel ? "block" : "none"}}>

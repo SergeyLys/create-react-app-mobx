@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {BrowserRouter, Route, Link} from 'react-router-dom';
+import {Router} from 'react-router-dom';
+
 import createBrowserHistory from 'history/createBrowserHistory';
 
 import Menu from './components/menu/index';
@@ -7,24 +8,27 @@ import LeftPanelController from './components/left-panel-controller/index';
 import Routes from './routes';
 
 import {Provider} from 'mobx-react';
-import menuStore from './stores/menu-store';
+// import {useStrict} from 'mobx';
+import Stores from './stores';
 
 const history = createBrowserHistory();
 
+// useStrict(true);
 
-const stores = {menuStore};
 
 const App = () => (
-    <Provider {...stores}>
-        <BrowserRouter history={history}>
+    <Provider
+        menuStore={Stores.menuStore}
+        userStore={Stores.userStore}
+    >
+        <Router history={history}>
             <div>
-                <Menu/>
-                <LeftPanelController/>
+
                 <Routes/>
-                
+
             </div>
-        </BrowserRouter>
+        </Router>
     </Provider>
-)
+);
 
 export default App;
